@@ -41,6 +41,8 @@ function Device() {
     this.uuid = null;
     this.cordova = null;
     this.model = null;
+    this.hardware = null;
+    this.emulator = null;
 
     var me = this;
 
@@ -55,6 +57,8 @@ function Device() {
             me.uuid = info.uuid;
             me.cordova = buildLabel;
             me.model = info.model;
+            me.hardware = info.hardware ? info.hardware: info.platform;
+            me.emulator = info.emulator ? info.emulator: false;
             channel.onCordovaInfoReady.fire();
         },function(e) {
             me.available = false;

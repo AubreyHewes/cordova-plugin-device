@@ -74,6 +74,7 @@ public class Device extends CordovaPlugin {
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
             r.put("hardware", this.getHardware());
+            r.put("emulator", this.isEmulator());
             callbackContext.success(r);
         }
         else {
@@ -125,13 +126,14 @@ public class Device extends CordovaPlugin {
     /**
      * Get the device's hardware designation.
      *
-     * @note In the case the SDK is below level 8 then will return the model
+     * @note In the case the SDK is below level 8 (froyo) then will return the platform
      * @note In the case the hardware is an emulator then will return a string containing "goldfish"
      *
      * @return
      */
     public String getHardware() {
-        return this.getSDKVersion() >= android.os.Build.VERSION_CODES.FROYO ? android.os.Build.HARDWARE : this.getModel();
+        return this.getSDKVersion() >= android.os.Build.VERSION_CODES.FROYO ? android.os.Build.HARDWARE
+            : this.getPlatform();
     }
 
     public String getProductName() {
@@ -170,6 +172,13 @@ public class Device extends CordovaPlugin {
             return true;
         }
         return false;
+    }
+
+    /**
+     * @return if the device is is an emulator
+     */
+    public boolean isEmulator() {
+        return this.getHardware().contains("goldfish");
     }
 
 }

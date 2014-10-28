@@ -39,6 +39,7 @@ Although the object is in the global scope, it is not available until after the 
 - device.uuid
 - device.version
 - device.hardware
+- device.emulator
 
 ## device.cordova
 
@@ -221,6 +222,22 @@ Get the operating system version.
 
 The `device.hardware` returns the name of the device's hardware.
 
+    var string = device.hardware;
+
+### Android Quirk
+
+If the Android SDK level is below 8 (froyo) then returns the `device.platform`
+
 ### Supported Platforms
 
-- Android 2.1+ (Level 8)
+- Android 2.2+ (Level 8) *Emulator returns a string containing "goldfish"*
+
+## device.emulator
+
+The `device.emulator` returns, if according to the `device.hardware`, whether it is an emulator (boolean)
+
+    var boolean = device.emulator;
+
+### Supported Platforms
+
+- Android 2.2+ (Level 8)
