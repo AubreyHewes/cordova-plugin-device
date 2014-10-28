@@ -62,7 +62,7 @@ public class Device extends CordovaPlugin {
      * Executes the request and returns PluginResult.
      *
      * @param action            The action to execute.
-     * @param args              JSONArry of arguments for the plugin.
+     * @param args              JSONArray of arguments for the plugin.
      * @param callbackContext   The callback id used when calling back into JavaScript.
      * @return                  True if the action was valid, false if not.
      */
@@ -73,6 +73,7 @@ public class Device extends CordovaPlugin {
             r.put("version", this.getOSVersion());
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
+            r.put("hardware", this.getHardware());
             callbackContext.success(r);
         }
         else {
@@ -110,9 +111,27 @@ public class Device extends CordovaPlugin {
         return uuid;
     }
 
+    /**
+     * Get the name of the device's model or product.
+     * The value is set by the device manufacturer and may be different across versions of the same product.
+     *
+     * @return
+     */
     public String getModel() {
         String model = android.os.Build.MODEL;
         return model;
+    }
+
+    /**
+     * Get the device's hardware designation.
+     *
+     * @note In the case the SDK is below level 8 then will return the model
+     * @note In the case the hardware is an emulator then will return a string containing "goldfish"
+     *
+     * @return
+     */
+    public String getHardware() {
+        return this.getSDKVersion() >= android.os.Build.VERSION_CODES.FROYO ? android.os.Build.HARDWARE : this.getModel();
     }
 
     public String getProductName() {

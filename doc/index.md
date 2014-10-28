@@ -38,6 +38,7 @@ Although the object is in the global scope, it is not available until after the 
 - device.platform
 - device.uuid
 - device.version
+- device.hardware
 
 ## device.cordova
 
@@ -216,3 +217,10 @@ Get the operating system version.
     // Tizen: returns "TIZEN_20120425_2"
     var deviceVersion = device.version;
 
+## device.hardware
+
+The `device.hardware` returns the name of the device's hardware.
+
+### Supported Platforms
+
+- Android 2.1+ (Level 8)
