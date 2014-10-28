@@ -132,7 +132,7 @@ public class Device extends CordovaPlugin {
      * @return
      */
     public String getHardware() {
-        return this.getSDKVersion() >= android.os.Build.VERSION_CODES.FROYO ? android.os.Build.HARDWARE
+        return android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO ? android.os.Build.HARDWARE
             : this.getPlatform();
     }
 
